@@ -1,24 +1,26 @@
 import React from "react";
 
 class NewQues extends React.Component {
+  handleNewQues = (e) => {
+    e.preventDefault();
+    // ToDo ;
+  };
+
   render() {
     return (
       <div className="container mt-3">
         <div className="row">
           <div className="col-12">
-            <div className="card w-50 m-auto">
+            <div className="card w-sm-50 m-auto">
               <div className="text-center">
                 <div className="card-header">Create New Question</div>
               </div>
               <div className="card-body">
-                <form>
+                <form onSubmit={(e) => this.handleNewQues(e)}>
                   <div className="form-group">
                     <div className="form-group row">
-                      <div className="col-12 col-sm-3">
-                        <label className="col-form-label">Question</label>
-                      </div>
-                      <div className="col-12 col-sm-9">
-                        <input placeholder="Enter Your Question" name="ques" />
+                      <div className="col-12 offset-sm-3">
+                        <h3>Would You Rather?</h3>
                       </div>
                     </div>
                     <div className="form-group row">

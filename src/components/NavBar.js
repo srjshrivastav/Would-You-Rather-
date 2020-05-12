@@ -10,7 +10,7 @@ class NavBar extends React.Component {
               WouldYouRather?
             </NavLink>
             <button
-              class="navbar-toggler"
+              className="navbar-toggler"
               type="button"
               data-toggle="collapse"
               data-target="#show"
@@ -18,11 +18,11 @@ class NavBar extends React.Component {
               aria-expanded="false"
               aria-label="Toggle navigation"
             />
-            <span class="navbar-toggler-icon"></span>
-            <div class="collapse navbar-collapse" id="show">
-              <ul class="navbar-nav ">
+            <span className="navbar-toggler-icon"></span>
+            <div className="collapse navbar-collapse" id="show">
+              <ul className="navbar-nav ">
                 <li className="nav-item">
-                  <NavLink class="nav-link text-white" to="/:id/Dashboard">
+                  <NavLink className="nav-link text-white" to="/:id/Dashboard">
                     Dashboard
                   </NavLink>
                 </li>

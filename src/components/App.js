@@ -10,13 +10,14 @@ import NewQues from "./NewQues";
 class App extends React.Component {
   state = {
     users: {},
+    questions: {},
   };
   componentDidMount() {
     getInitialData().then(({ users, questions }) => {
       this.setState(() => ({
         users,
+        questions,
       }));
-      console.log(this.props);
     });
   }
 
