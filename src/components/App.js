@@ -26,7 +26,7 @@ class App extends React.Component {
       <div>
         <NavBar />
         {/* <Home users={this.state.users} /> */}
-        <Dashboard />
+        <NewQues />
       </div>
     );
   }
