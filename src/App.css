@@ -70,3 +70,6 @@
   text-align: center;
   color: white;
 }
+.active {
+  font-weight: bold;
+}
