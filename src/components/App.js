@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "../App.css";
 import { connect } from "react-redux";
 import { getInitialData } from "../utils/api";
@@ -8,7 +8,8 @@ import NavBar from "./NavBar";
 import Home from "./Home";
 import Leaderboard from "./Leaderboard";
 import NewQues from "./NewQues";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
+import QuestionCard from "./QuestionCard";
 
 class App extends React.Component {
   componentDidMount() {
@@ -18,15 +19,40 @@ class App extends React.Component {
     });
   }
   render() {
+    const { logIn, users } = this.props;
+    console.log("helloo", users);
     return (
-      <div>
+      <Fragment>
         <NavBar />
         <Route exact path="/" component={Home} />
-        <Route exact path="/:id/Leaderboard" component={Leaderboard} />
-        <Route exact path="/:id/askNewQuestion" component={NewQues} />
-      </div>
+        {logIn && (
+          <div>
+            <Route exact path="/:id/Leaderboard" component={Leaderboard} />
+            <Route exact path="/:id/askNewQuestion" component={NewQues} />
+            <Route
+              exact
+              path="/:id/Unanswered"
+              render={() => <QuestionCard />}
+            />
+            <Route
+              exact
+              path="/:id/Answered"
+              render={() => (
+                <QuestionCard id={Object.keys(users[logIn].answers)} />
+              )}
+            />
+          </div>
+        )}
+        {!logIn && <Redirect to="/" />}
+      </Fragment>
     );
   }
 }
+function mapStateToProps({ authedUser, users }) {
+  return {
+    logIn: authedUser !== null ? authedUser : null,
+    users,
+  };
+}
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);

@@ -3,44 +3,62 @@ import { connect } from "react-redux";
 
 class Questioncard extends React.Component {
   render() {
-    const { choiceOne, choiceTwo } = this.props;
+    const { questions, id, ans } = this.props;
     return (
-      <div className="card">
-        <div className="card-header">Would You Rather?</div>
-        <div className="card-body">
-          <div className="custom-control custom-radio">
-            <input
-              type="radio"
-              className="custom-control-input"
-              id={choiceOne.text}
-              name="ng"
-              value="1"
-            />
-            <label className="custom-control-label" htmlFor={choiceOne.text}>
-              {choiceOne.text}
-            </label>
+      <div className="container mt-3">
+        <h3 className="text-center">Answered</h3>
+        {id.map((i) => (
+          <div className="card mt-1 mb-3" key={i}>
+            <div className="card-header">Would You Rather?</div>
+            <div className="card-body">
+              <form>
+                <fieldset id={i}>
+                  <div className="custom-control custom-radio">
+                    <input
+                      type="radio"
+                      className="custom-control-input"
+                      id={questions[i].optionOne.text}
+                      name="option"
+                      value={questions[i].optionOne.text}
+                      checked={ans[i] === "optionOne"}
+                    />
+                    <label
+                      className="custom-control-label"
+                      htmlFor={questions[i].optionOne.text}
+                    >
+                      {questions[i].optionOne.text}
+                    </label>
+                  </div>
+                  <div className="custom-control custom-radio mt-4">
+                    <input
+                      type="radio"
+                      className="custom-control-input"
+                      id={questions[i].optionTwo.text}
+                      name="option"
+                      value={questions[i].optionOne.text}
+                      checked={ans[i] === "optionTwo"}
+                    />
+                    <label
+                      className="custom-control-label mt"
+                      htmlFor={questions[i].optionTwo.text}
+                    >
+                      {questions[i].optionTwo.text}
+                    </label>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
           </div>
-          <div className="custom-control custom-radio mt-4">
-            <input
-              type="radio"
-              className="custom-control-input"
-              id={choiceTwo.text}
-              name="ng"
-              value="2"
-            />
-            <label className="custom-control-label mt" htmlFor={choiceTwo.text}>
-              {choiceTwo.text}
-            </label>
-          </div>
-        </div>
+        ))}
       </div>
     );
   }
 }
-function mapStateToProps({ questions }, { id }) {
+function mapStateToProps({ questions, authedUser, users }, { id }) {
   return {
-    choiceOne: questions[id].optionOne,
-    choiceTwo: questions[id].optionTwo,
+    questions,
+    id,
+    ans: users[authedUser].answers,
   };
 }
 export default connect(mapStateToProps)(Questioncard);
