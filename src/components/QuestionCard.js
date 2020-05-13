@@ -1,14 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
+import { handleAnswer } from "../actions/shared";
 
 class Questioncard extends React.Component {
-  handleChange = (e) => {
+  handleChange = (e, id) => {
     e.preventDefault();
-    //ToDos save Ans
+    const ans = e.target.value;
+    this.props.dispatch(handleAnswer(id, ans));
   };
 
   render() {
-    const { questions, id, ans, title } = this.props;
+    const { questions, id, ans, title, authedUser } = this.props;
     return (
       <div className="container mt-3">
         <h3 className="text-center">{title}</h3>
@@ -24,10 +26,10 @@ class Questioncard extends React.Component {
                       className="custom-control-input"
                       id={questions[i].optionOne.text}
                       name="option"
-                      value={questions[i].optionOne.text}
+                      value="optionOne"
                       checked={ans ? ans[i] === "optionOne" : false}
                       disabled={ans ? true : false}
-                      onChange={(e) => this.handleChange(e)}
+                      onChange={(e) => this.handleChange(e, i)}
                     />
                     <label
                       className="custom-control-label"
@@ -42,10 +44,10 @@ class Questioncard extends React.Component {
                       className="custom-control-input"
                       id={questions[i].optionTwo.text}
                       name="option"
-                      value={questions[i].optionOne.text}
+                      value="optionTwo"
                       checked={ans ? ans[i] === "optionTwo" : false}
                       disabled={ans ? true : false}
-                      onChange={(e) => this.handleChange(e)}
+                      onChange={(e) => this.handleChange(e, i)}
                     />
                     <label
                       className="custom-control-label mt"
