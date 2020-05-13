@@ -1,14 +1,16 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 class NavBar extends React.Component {
   render() {
+    const { authedUser } = this.props;
     return (
       <div>
         <nav className="navbar navbar-expand-lg bg-dark static-top ">
           <div className="container">
-            <NavLink className="navbar-brand mr-auto text-white" to="/">
+            <Link className="navbar-brand mr-auto text-white" to="/">
               WouldYouRather?
-            </NavLink>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -22,28 +24,39 @@ class NavBar extends React.Component {
             <div className="collapse navbar-collapse" id="show">
               <ul className="navbar-nav ">
                 <li className="nav-item">
-                  <NavLink className="nav-link text-white" to="/:id/Dashboard">
-                    Dashboard
-                  </NavLink>
-                </li>
-                <li className="nav-item ">
-                  <NavLink className="nav-link text-white" to="/:id/unanswered">
-                    Unanswred
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link text-white" to="/:id/answered">
-                    Answred
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink
+                  <Link
                     className="nav-link text-white"
-                    to="/:id/leaderboard"
+                    to={`/${authedUser}/leaderboard`}
                   >
                     Leaderboard
-                  </NavLink>
+                  </Link>
                 </li>
+                <li className="nav-item ">
+                  <Link
+                    className="nav-link text-white"
+                    to={`/${authedUser}/unanswered`}
+                  >
+                    Unanswred
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link text-white"
+                    to={`/${authedUser}/answered`}
+                  >
+                    Answred
+                  </Link>
+                </li>
+                {authedUser && (
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link text-white"
+                      to={`/${authedUser}/askNewQuestion`}
+                    >
+                      Ask New Question?
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -52,4 +65,9 @@ class NavBar extends React.Component {
     );
   }
 }
-export default NavBar;
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser,
+  };
+}
+export default connect(mapStateToProps)(NavBar);

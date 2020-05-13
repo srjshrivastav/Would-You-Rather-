@@ -1,9 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import avatar from "../images/avatar.png";
+import { Link } from "react-router-dom";
+import { setAuthedUser } from "../actions/authUsers";
 
 class Home extends React.Component {
+  handleLogin = (id) => {
+    this.props.dispatch(setAuthedUser(id));
+  };
   render() {
+    const { users } = this.props;
+    console.log(users);
     return (
       <div className="container mt-5">
         <div className="row row-content">
@@ -36,10 +43,16 @@ class Home extends React.Component {
                     <span className="sr-only">Toggle Dropright</span>
                   </button>
                   <div className="dropdown-menu">
-                    {Object.keys(this.props.users).map((user) => (
-                      <a className="dropdown-item" key={user}>
+                    {Object.keys(users).map((user) => (
+                      <Link
+                        className="dropdown-item"
+                        id={user}
+                        key={users[user].id}
+                        to={`/${user}/Leaderboard`}
+                        onClick={this.handleLogin.bind(this, users[user].id)}
+                      >
                         {user}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -52,4 +65,10 @@ class Home extends React.Component {
   }
 }
 
-export default connect()(Home);
+function mapStateToProps({ users }) {
+  return {
+    users,
+  };
+}
+
+export default connect(mapStateToProps)(Home);
