@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 class NavBar extends React.Component {
   render() {
@@ -11,64 +11,63 @@ class NavBar extends React.Component {
             <Link className="navbar-brand mr-auto text-white" to="/">
               WouldYouRather?
             </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#show"
-            >
-              <span className="navbar-toggler-icon my-toggler"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="show">
-              {authedUser && (
-                <ul className="navbar-nav m-1 ">
-                  <li className="nav-item order-sm-last">
-                    <span className="text-white">Hello! {user.name}</span>
-                    <img
-                      src={user.avatarURL}
-                      className="LeadAvatar"
-                      alt={`Avatar of ${user.name}`}
-                    />
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link text-white"
-                      to={`/${authedUser}/leaderboard`}
-                      activeClassName="active"
+            {authedUser && (
+              <ul className="navbar-nav justify-content-end">
+                <li className="nav-item">
+                  <img
+                    src={user.avatarURL}
+                    className="LeadAvatar"
+                    alt={`Avatar of ${user.name}`}
+                  />
+                </li>
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle text-white"
+                    id="navbarDropdown"
+                    to="#"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Hello! {user.name}
+                  </Link>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <Link
+                      className="dropdown-item"
+                      to={`/${user.id}/Leaderboard`}
                     >
                       Leaderboard
-                    </NavLink>
-                  </li>
-                  <li className="nav-item ">
-                    <NavLink
-                      className="nav-link text-white"
-                      to={`/${authedUser}/unanswered`}
-                      activeClassName="active"
+                    </Link>
+                    <Link
+                      className="dropdown-item"
+                      to={`/${user.name}/Unanswered`}
                     >
-                      Unanswred
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link text-white"
-                      to={`/${authedUser}/answered`}
-                      activeClassName="active"
+                      Unanswered
+                    </Link>
+                    <Link
+                      className="dropdown-item"
+                      to={`/${user.name}/Answered`}
                     >
-                      Answred
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link text-white"
-                      to={`/${authedUser}/askNewQuestion`}
-                      activeClassName="active"
+                      Answered
+                    </Link>
+                    <Link
+                      className="dropdown-item"
+                      to={`/${user.name}/askNewQuestion`}
                     >
                       Ask New Question?
-                    </NavLink>
-                  </li>
-                </ul>
-              )}
-            </div>
+                    </Link>
+                    <div className="dropdown-divider"></div>
+                    <Link className="dropdown-item" to="/">
+                      Logout
+                    </Link>
+                  </div>
+                </li>
+              </ul>
+            )}
           </div>
         </nav>
       </div>
