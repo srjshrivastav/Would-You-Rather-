@@ -46,3 +46,27 @@
   height: 50px;
   border-radius: 50%;
 }
+
+.progress {
+  margin-top: 25px;
+  width: 100%;
+  background: #000;
+  height: 25px;
+  display: inline-flex;
+  color: #e8f1e8;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.progress-one {
+  height: 100%;
+  background: #9224ad;
+  text-align: center;
+}
+
+.progress-two {
+  height: 100%;
+  background: #f5f82d;
+  text-align: center;
+  color: #000;
+}

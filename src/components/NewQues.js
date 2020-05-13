@@ -1,16 +1,25 @@
 import React from "react";
 import { handleAddQuestion } from "../actions/shared";
-import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 class NewQues extends React.Component {
+  state = {
+    opOne: "",
+    opTwo: "",
+  };
+  handleChange = (e) => {
+    this.setState(() => ({
+      opOne: document.getElementById("optionOne").value,
+      opTwo: document.getElementById("optionTwo").value,
+    }));
+  };
   handleNewQues = (e) => {
     e.preventDefault();
-    const opOne = document.getElementById("optionOne");
-    const opTwo = document.getElementById("optionTwo");
-    handleAddQuestion(opOne, opTwo);
-    opOne.value = "";
-    opTwo.value = "";
-    return <Redirect to="/:id/Leaderboard" />;
+    const opOne = this.state.opOne;
+    const opTwo = this.state.opTwo;
+    this.props.dispatch(handleAddQuestion(opOne, opTwo));
+    this.props.history.push(`/${this.props.authedUser}/Unanswered`);
   };
 
   render() {
@@ -38,6 +47,7 @@ class NewQues extends React.Component {
                         <input
                           placeholder="Enter First option"
                           id="optionOne"
+                          onChange={(e) => this.handleChange(e)}
                         />
                       </div>
                     </div>
@@ -49,12 +59,18 @@ class NewQues extends React.Component {
                         <input
                           placeholder="Enter  second option"
                           id="optionTwo"
+                          onChange={(e) => this.handleChange(e)}
                         />
                       </div>
                     </div>
                     <div className="form-group row">
                       <div className="col-12 offset-sm-3">
-                        <button className="btn btn-outline-dark">
+                        <button
+                          className="btn btn-outline-dark"
+                          disabled={
+                            this.state.opTwo === "" || this.state.opOne === ""
+                          }
+                        >
                           Post Question
                         </button>
                       </div>
@@ -69,5 +85,10 @@ class NewQues extends React.Component {
     );
   }
 }
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser,
+  };
+}
 
-export default NewQues;
+export default withRouter(connect(mapStateToProps)(NewQues));

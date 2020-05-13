@@ -9,7 +9,7 @@ import Home from "./Home";
 import Leaderboard from "./Leaderboard";
 import NewQues from "./NewQues";
 import { Route, Redirect } from "react-router-dom";
-import QuestionCard from "./QuestionCard";
+import QuestionCard from "./Question";
 
 class App extends React.Component {
   componentDidMount() {
@@ -19,8 +19,7 @@ class App extends React.Component {
     });
   }
   render() {
-    const { logIn, users } = this.props;
-    console.log("helloo", users);
+    const { logIn } = this.props;
     return (
       <Fragment>
         <NavBar />
@@ -49,7 +48,6 @@ class App extends React.Component {
 function mapStateToProps({ authedUser, users }) {
   return {
     logIn: authedUser !== null ? authedUser : null,
-    users,
   };
 }
 
