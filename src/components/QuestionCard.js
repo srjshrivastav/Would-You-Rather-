@@ -2,11 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 
 class Questioncard extends React.Component {
+  handleChange = (e) => {
+    e.preventDefault();
+    //ToDos save Ans
+  };
+
   render() {
-    const { questions, id, ans } = this.props;
+    const { questions, id, ans, title } = this.props;
     return (
       <div className="container mt-3">
-        <h3 className="text-center">Answered</h3>
+        <h3 className="text-center">{title}</h3>
         {id.map((i) => (
           <div className="card mt-1 mb-3" key={i}>
             <div className="card-header">Would You Rather?</div>
@@ -20,7 +25,9 @@ class Questioncard extends React.Component {
                       id={questions[i].optionOne.text}
                       name="option"
                       value={questions[i].optionOne.text}
-                      checked={ans[i] === "optionOne"}
+                      checked={ans ? ans[i] === "optionOne" : false}
+                      disabled={ans ? true : false}
+                      onChange={(e) => this.handleChange(e)}
                     />
                     <label
                       className="custom-control-label"
@@ -36,7 +43,9 @@ class Questioncard extends React.Component {
                       id={questions[i].optionTwo.text}
                       name="option"
                       value={questions[i].optionOne.text}
-                      checked={ans[i] === "optionTwo"}
+                      checked={ans ? ans[i] === "optionTwo" : false}
+                      disabled={ans ? true : false}
+                      onChange={(e) => this.handleChange(e)}
                     />
                     <label
                       className="custom-control-label mt"
@@ -54,11 +63,22 @@ class Questioncard extends React.Component {
     );
   }
 }
-function mapStateToProps({ questions, authedUser, users }, { id }) {
+function mapStateToProps({ questions, authedUser, users }, { title }) {
+  let id = Object.keys(users[authedUser].answers);
+  if (title === "Unanswered") {
+    id = Object.keys(questions).filter((i) => !id.includes(i));
+    return {
+      questions,
+      id,
+      title,
+    };
+  }
+
   return {
     questions,
     id,
     ans: users[authedUser].answers,
+    title,
   };
 }
 export default connect(mapStateToProps)(Questioncard);

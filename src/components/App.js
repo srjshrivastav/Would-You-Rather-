@@ -32,14 +32,12 @@ class App extends React.Component {
             <Route
               exact
               path="/:id/Unanswered"
-              render={() => <QuestionCard />}
+              render={() => <QuestionCard title={"Unanswered"} />}
             />
             <Route
               exact
               path="/:id/Answered"
-              render={() => (
-                <QuestionCard id={Object.keys(users[logIn].answers)} />
-              )}
+              render={() => <QuestionCard title={"Answered"} />}
             />
           </div>
         )}
