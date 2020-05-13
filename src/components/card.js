@@ -68,8 +68,8 @@ class Card extends React.Component {
             </div>
           )}
         </div>
-        <div className="card-footer">
-          <div className="container text-left">~{question.author}</div>
+        <div className="card-footer text-muted text-right">
+          ~{question.author}
         </div>
       </div>
     );
