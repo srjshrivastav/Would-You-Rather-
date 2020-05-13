@@ -1,9 +1,16 @@
 import React from "react";
+import { handleAddQuestion } from "../actions/shared";
+import { Redirect } from "react-router-dom";
 
 class NewQues extends React.Component {
   handleNewQues = (e) => {
     e.preventDefault();
-    // ToDo ;
+    const opOne = document.getElementById("optionOne");
+    const opTwo = document.getElementById("optionTwo");
+    handleAddQuestion(opOne, opTwo);
+    opOne.value = "";
+    opTwo.value = "";
+    return <Redirect to="/:id/Leaderboard" />;
   };
 
   render() {
@@ -28,7 +35,10 @@ class NewQues extends React.Component {
                         <label className="col-form-label">First Option</label>
                       </div>
                       <div className="col-12 col-sm-9">
-                        <input placeholder="Enter First option" name="ques" />
+                        <input
+                          placeholder="Enter First option"
+                          id="optionOne"
+                        />
                       </div>
                     </div>
                     <div className="form-group row">
@@ -36,7 +46,10 @@ class NewQues extends React.Component {
                         <label className="col-form-label">Second option</label>
                       </div>
                       <div className="col-12 col-sm-9">
-                        <input placeholder="Enter  second option" name="ques" />
+                        <input
+                          placeholder="Enter  second option"
+                          id="optionTwo"
+                        />
                       </div>
                     </div>
                     <div className="form-group row">

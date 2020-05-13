@@ -10,7 +10,7 @@ class Questioncard extends React.Component {
   };
 
   render() {
-    const { questions, id, ans, title, authedUser } = this.props;
+    const { questions, id, ans, title } = this.props;
     return (
       <div className="container mt-3">
         <h3 className="text-center">{title}</h3>
