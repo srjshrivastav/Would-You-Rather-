@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { unsetAuthedUser } from "../actions/authUsers";
 class NavBar extends React.Component {
+  logout = () => {
+    this.props.dispatch(unsetAuthedUser());
+  };
+
   render() {
     const { authedUser, user } = this.props;
     return (
@@ -61,7 +66,11 @@ class NavBar extends React.Component {
                       Ask New Question?
                     </Link>
                     <div className="dropdown-divider"></div>
-                    <Link className="dropdown-item" to="/">
+                    <Link
+                      className="dropdown-item"
+                      to="/"
+                      onClick={() => this.logout()}
+                    >
                       Logout
                     </Link>
                   </div>
