@@ -13,70 +13,90 @@ class NavBar extends React.Component {
       <div>
         <nav className="navbar navbar-expand-lg bg-dark static-top ">
           <div className="container">
-            <Link className="navbar-brand mr-auto text-white" to="/">
+            <Link
+              className="navbar-brand mr-auto text-white"
+              to={authedUser ? `/${user.id}/Leaderboard` : "/"}
+            >
               WouldYouRather?
             </Link>
-            {authedUser && (
-              <ul className="navbar-nav justify-content-end">
-                <li className="nav-item">
-                  <img
-                    src={user.avatarURL}
-                    className="LeadAvatar"
-                    alt={`Avatar of ${user.name}`}
-                  />
-                </li>
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle text-white"
-                    id="navbarDropdown"
-                    to="#"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Hello! {user.name}
-                  </Link>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                  >
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+
+            <div
+              className="collapse navbar-collapse justify-content-end"
+              id="navbarSupportedContent"
+            >
+              {authedUser && (
+                <ul className="navbar-nav">
+                  <li className="nav-item dropdown hover">
                     <Link
-                      className="dropdown-item"
-                      to={`/${user.id}/Leaderboard`}
+                      className="nav-link dropdown-toggle text-white"
+                      id="navbarDropdown"
+                      to="#"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
                     >
-                      Leaderboard
+                      <span>
+                        <img
+                          src={user.avatarURL}
+                          className="navavatar"
+                          alt={`Avatar of ${user.name}`}
+                        />
+                      </span>
+                      Hello! {user.name}
                     </Link>
-                    <Link
-                      className="dropdown-item"
-                      to={`/${user.name}/Unanswered`}
+                    <div
+                      className="dropdown-menu bg-dark"
+                      aria-labelledby="navbarDropdown"
                     >
-                      Unanswered
-                    </Link>
-                    <Link
-                      className="dropdown-item"
-                      to={`/${user.name}/Answered`}
-                    >
-                      Answered
-                    </Link>
-                    <Link
-                      className="dropdown-item"
-                      to={`/${user.name}/askNewQuestion`}
-                    >
-                      Ask New Question?
-                    </Link>
-                    <div className="dropdown-divider"></div>
-                    <Link
-                      className="dropdown-item"
-                      to="/"
-                      onClick={() => this.logout()}
-                    >
-                      Logout
-                    </Link>
-                  </div>
-                </li>
-              </ul>
-            )}
+                      <Link
+                        className="dropdown-item  text-white hover-color"
+                        to={`/${user.id}/Leaderboard`}
+                      >
+                        Leaderboard
+                      </Link>
+                      <Link
+                        className="dropdown-item text-white hover-color"
+                        to={`/${user.name}/Unanswered`}
+                      >
+                        Unanswered
+                      </Link>
+                      <Link
+                        className="dropdown-item text-white hover-color"
+                        to={`/${user.name}/Answered`}
+                      >
+                        Answered
+                      </Link>
+                      <Link
+                        className="dropdown-item text-white hover-color"
+                        to={`/${user.name}/askNewQuestion`}
+                      >
+                        Ask New Question?
+                      </Link>
+                      <div className="dropdown-divider"></div>
+                      <Link
+                        className="dropdown-item text-white hover-color"
+                        to="/"
+                        onClick={() => this.logout()}
+                      >
+                        Logout
+                      </Link>
+                    </div>
+                  </li>
+                </ul>
+              )}
+            </div>
           </div>
         </nav>
       </div>
