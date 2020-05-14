@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Card from "./card";
+// import Card from "./card";
+import MinCard from "./MinCard";
 
 class Questioncard extends React.Component {
   render() {
-    const { ids, ans, title, authedUser } = this.props;
+    const { ids, title, authedUser } = this.props;
     return (
       <div className="container">
         <ul className="nav nav-tabs bg-dark hover-color">
@@ -34,9 +35,15 @@ class Questioncard extends React.Component {
             </Link>
           </li>
         </ul>
-        {ids.map((id) => (
-          <Card id={id} title={title} ans={ans} key={id} />
-        ))}
+        <div className="container">
+          <div className="row">
+            <div className="col-12 col-sm">
+              {ids.map((id) => (
+                <MinCard id={id} key={id} />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

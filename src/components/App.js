@@ -10,6 +10,7 @@ import Leaderboard from "./Leaderboard";
 import NewQues from "./NewQues";
 import { Route, Redirect, withRouter } from "react-router-dom";
 import QuestionCard from "./Question";
+import Card from "./card";
 
 class App extends React.Component {
   componentDidMount() {
@@ -28,16 +29,17 @@ class App extends React.Component {
           <div>
             <Route
               exact
-              path="/:id/Home/Unanswered"
+              path="/:user/Home/Unanswered"
               render={() => <QuestionCard title={"Unanswered"} />}
             />
-            <Route exact path="/:id/askNewQuestion" component={NewQues} />
-            <Route exact path="/:id/Leaderboard" component={Leaderboard} />
             <Route
               exact
-              path="/:id/Home/Answered"
+              path="/:user/Home/Answered"
               render={() => <QuestionCard title={"Answered"} />}
             />
+            <Route exact path="/question/:qid" component={Card} />
+            <Route exact path="/:id/askNewQuestion" component={NewQues} />
+            <Route exact path="/:id/Leaderboard" component={Leaderboard} />
           </div>
         )}
         {!logIn && <Redirect to="/" />}
