@@ -5,10 +5,10 @@ import { getInitialData } from "../utils/api";
 import { receiveUsers } from "../actions/users";
 import { receiveQuestions } from "../actions/questions";
 import NavBar from "./NavBar";
-import Home from "./Home";
+import LoginPage from "./LogInPage";
 import Leaderboard from "./Leaderboard";
 import NewQues from "./NewQues";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
 import QuestionCard from "./Question";
 
 class App extends React.Component {
@@ -23,19 +23,19 @@ class App extends React.Component {
     return (
       <Fragment>
         <NavBar />
-        <Route exact path="/" component={Home} />
+        {!logIn && <Route exact path="/" component={LoginPage} />}
         {logIn && (
           <div>
-            <Route exact path="/:id/Leaderboard" component={Leaderboard} />
-            <Route exact path="/:id/askNewQuestion" component={NewQues} />
             <Route
               exact
-              path="/:id/Unanswered"
+              path="/:id/Home/Unanswered"
               render={() => <QuestionCard title={"Unanswered"} />}
             />
+            <Route exact path="/:id/askNewQuestion" component={NewQues} />
+            <Route exact path="/:id/Leaderboard" component={Leaderboard} />
             <Route
               exact
-              path="/:id/Answered"
+              path="/:id/Home/Answered"
               render={() => <QuestionCard title={"Answered"} />}
             />
           </div>
@@ -45,10 +45,10 @@ class App extends React.Component {
     );
   }
 }
-function mapStateToProps({ authedUser, users }) {
+function mapStateToProps({ authedUser }) {
   return {
     logIn: authedUser !== null ? authedUser : null,
   };
 }
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

@@ -77,9 +77,6 @@
   text-align: center;
   color: white;
 }
-.active {
-  font-weight: bold;
-}
 .hover-color:hover {
   background: rgb(37, 35, 35);
 }

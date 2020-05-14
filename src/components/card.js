@@ -11,6 +11,7 @@ class Card extends React.Component {
 
   render() {
     const { id, percOne, percTwo, question, title, ans } = this.props;
+    console.log(ans);
     return (
       <div className="card mt-1 mb-3" key={id}>
         <div className="card-header">Would You Rather?</div>
@@ -24,7 +25,9 @@ class Card extends React.Component {
                   id={question.optionOne.text}
                   name="option"
                   value="optionOne"
-                  checked={ans === "optionOne" ? true : false}
+                  checked={
+                    ans ? (ans[id] === "optionOne" ? true : false) : false
+                  }
                   disabled={ans ? true : false}
                   onChange={(e) => this.handleChange(e, id)}
                 />
@@ -42,7 +45,9 @@ class Card extends React.Component {
                   id={question.optionTwo.text}
                   name="option"
                   value="optionTwo"
-                  checked={ans === "optionTwo" ? true : false}
+                  checked={
+                    ans ? (ans[id] === "optionTwo" ? true : false) : false
+                  }
                   disabled={ans ? true : false}
                   onChange={(e) => this.handleChange(e, id)}
                 />

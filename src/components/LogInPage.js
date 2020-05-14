@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import avatar from "../images/avatar.png";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { setAuthedUser } from "../actions/authUsers";
 
-class Home extends React.Component {
+class LoginPage extends React.Component {
   handleLogin = (id) => {
     this.props.dispatch(setAuthedUser(id));
   };
@@ -47,7 +47,7 @@ class Home extends React.Component {
                         className="dropdown-item"
                         id={user}
                         key={users[user].id}
-                        to={`/${user}/Leaderboard`}
+                        to={`/${user}/Home/Unanswered`}
                         onClick={this.handleLogin.bind(this, users[user].id)}
                       >
                         {user}
@@ -70,4 +70,4 @@ function mapStateToProps({ users }) {
   };
 }
 
-export default connect(mapStateToProps)(Home);
+export default withRouter(connect(mapStateToProps)(LoginPage));

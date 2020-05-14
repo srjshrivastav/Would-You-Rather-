@@ -68,18 +68,6 @@ class NavBar extends React.Component {
                       </Link>
                       <Link
                         className="dropdown-item text-white hover-color"
-                        to={`/${user.name}/Unanswered`}
-                      >
-                        Unanswered
-                      </Link>
-                      <Link
-                        className="dropdown-item text-white hover-color"
-                        to={`/${user.name}/Answered`}
-                      >
-                        Answered
-                      </Link>
-                      <Link
-                        className="dropdown-item text-white hover-color"
                         to={`/${user.name}/askNewQuestion`}
                       >
                         Ask New Question?

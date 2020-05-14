@@ -19,7 +19,7 @@ class NewQues extends React.Component {
     const opOne = this.state.opOne;
     const opTwo = this.state.opTwo;
     this.props.dispatch(handleAddQuestion(opOne, opTwo));
-    this.props.history.push(`/${this.props.authedUser}/Unanswered`);
+    this.props.history.push(`/${this.props.authedUser}/Home/Unanswered`);
   };
 
   render() {
