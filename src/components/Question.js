@@ -47,7 +47,7 @@ function mapStateToProps({ questions, authedUser, users }, { title }) {
   if (title === "Unanswered") {
     ids = Object.keys(questions)
       .filter((i) => !ids.includes(i))
-      .sort((a, b) => b.timestamp - a.timestamp);
+      .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
     return {
       ids,
       title,

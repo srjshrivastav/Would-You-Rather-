@@ -11,7 +11,6 @@ class Card extends React.Component {
 
   render() {
     const { id, percOne, percTwo, question, title, ans } = this.props;
-    console.log(ans);
     return (
       <div className="card mt-1 mb-3" key={id}>
         <div className="card-header">Would You Rather?</div>
