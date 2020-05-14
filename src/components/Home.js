@@ -10,7 +10,6 @@ class Home extends React.Component {
   };
   render() {
     const { users } = this.props;
-    console.log(users);
     return (
       <div className="container mt-5">
         <div className="row row-content">
