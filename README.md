@@ -5,7 +5,7 @@ This application will also the percentage of people that how many people choose 
 
 ### Prerequisities
 
-1.Should install node js on the system
+1.Should install node js on the system<br/>
 2.Should have configured npm
 
 ### Steps to Install and Start Project
