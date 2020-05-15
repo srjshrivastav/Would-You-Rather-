@@ -142,7 +142,6 @@ function mapStateToProps({ questions, users, authedUser }, { match }) {
       authedUser,
     };
   }
-  console.log(authedUser);
   return {
     authedUser,
   };
