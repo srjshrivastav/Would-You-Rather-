@@ -7,7 +7,6 @@ import LoginPage from "./LogInPage";
 class Questioncard extends React.Component {
   render() {
     const { ids, title, authedUser } = this.props;
-    console.log(authedUser);
     return !authedUser ? (
       <LoginPage />
     ) : (
@@ -54,7 +53,6 @@ class Questioncard extends React.Component {
 
 function mapStateToProps({ questions, authedUser, users }, { title }) {
   let ids, ans;
-  console.log("In Else", authedUser);
   if (authedUser) {
     ids = Object.keys(users[authedUser].answers);
     ans = users[authedUser].answers;

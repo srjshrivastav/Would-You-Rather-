@@ -46,10 +46,5 @@ class App extends React.Component {
     );
   }
 }
-// function mapStateToProps({ authedUser }) {
-//   return {
-//     logIn: authedUser !== null ? authedUser : null,
-//   };
-// }
 
 export default withRouter(connect()(App));

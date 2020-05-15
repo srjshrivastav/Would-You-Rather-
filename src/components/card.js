@@ -1,6 +1,7 @@
 import React from "react";
 import { handleAnswer } from "../actions/shared";
 import { connect } from "react-redux";
+import LoginPage from "./LogInPage";
 
 class Card extends React.Component {
   handleChange = (e, id) => {
@@ -13,8 +14,19 @@ class Card extends React.Component {
   };
 
   render() {
-    const { id, percOne, percTwo, question, title, ans } = this.props;
-    return (
+    const {
+      id,
+      percOne,
+      percTwo,
+      question,
+      title,
+      ans,
+      authedUser,
+    } = this.props;
+
+    return !authedUser ? (
+      <LoginPage />
+    ) : (
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="card w-50 h-75">
@@ -96,25 +108,32 @@ function financial(x) {
 
 function mapStateToProps({ questions, users, authedUser }, { match }) {
   let percOne, percTwo, ans, total;
-  const ansIds = Object.keys(users[authedUser].answers);
-  const id = match.params.qid;
-  const question = questions[id];
-  let title = "Unanswered";
-  if (ansIds.includes(id) === true) {
-    ans = users[authedUser].answers[id];
-    title = "Answered";
-    total = question.optionOne.votes.length + question.optionTwo.votes.length;
-    percOne = financial((question.optionOne.votes.length / total) * 100);
-    percTwo = financial((question.optionTwo.votes.length / total) * 100);
-  }
+  if (authedUser) {
+    const ansIds = Object.keys(users[authedUser].answers);
+    const id = match.params.qid;
+    const question = questions[id];
+    let title = "Unanswered";
+    if (ansIds.includes(id) === true) {
+      ans = users[authedUser].answers[id];
+      title = "Answered";
+      total = question.optionOne.votes.length + question.optionTwo.votes.length;
+      percOne = financial((question.optionOne.votes.length / total) * 100);
+      percTwo = financial((question.optionTwo.votes.length / total) * 100);
+    }
 
+    return {
+      id,
+      title,
+      percOne,
+      percTwo,
+      question,
+      ans,
+      authedUser,
+    };
+  }
+  console.log(authedUser);
   return {
-    id,
-    title,
-    percOne,
-    percTwo,
-    question,
-    ans,
+    authedUser,
   };
 }
 
