@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-// import Card from "./card";
 import MinCard from "./MinCard";
 
 class Questioncard extends React.Component {

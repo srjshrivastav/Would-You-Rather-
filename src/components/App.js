@@ -8,10 +8,10 @@ import NavBar from "./NavBar";
 import LoginPage from "./LogInPage";
 import Leaderboard from "./Leaderboard";
 import NewQues from "./NewQues";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, withRouter, Switch } from "react-router-dom";
 import QuestionCard from "./Question";
 import Card from "./card";
-
+import NotFound from "./NotFound";
 class App extends React.Component {
   componentDidMount() {
     getInitialData().then(({ users, questions }) => {
@@ -22,28 +22,32 @@ class App extends React.Component {
   render() {
     const { logIn } = this.props;
     return (
-      <Fragment>
+      <div>
         <NavBar />
-        {!logIn && <Route exact path="/" component={LoginPage} />}
-        {logIn && (
-          <div>
-            <Route
-              exact
-              path="/:user/Home/Unanswered"
-              render={() => <QuestionCard title={"Unanswered"} />}
-            />
-            <Route
-              exact
-              path="/:user/Home/Answered"
-              render={() => <QuestionCard title={"Answered"} />}
-            />
-            <Route exact path="/question/:qid" component={Card} />
-            <Route exact path="/:id/askNewQuestion" component={NewQues} />
-            <Route exact path="/:id/Leaderboard" component={Leaderboard} />
-          </div>
-        )}
-        {!logIn && <Redirect to="/" />}
-      </Fragment>
+        <Switch>
+          {!logIn ? (
+            <Route exact path="/" component={LoginPage} />
+          ) : (
+            <Fragment>
+              <Route
+                exact
+                path="/:user/Home/Unanswered"
+                render={() => <QuestionCard title={"Unanswered"} />}
+              />
+              <Route
+                exact
+                path="/:user/Home/Answered"
+                render={() => <QuestionCard title={"Answered"} />}
+              />
+              <Route exact path="/question/:qid" component={Card} />
+              <Route exact path="/:id/askNewQuestion" component={NewQues} />
+              <Route exact path="/:id/Leaderboard" component={Leaderboard} />
+            </Fragment>
+          )}
+
+          <NotFound history={this.props.history} />
+        </Switch>
+      </div>
     );
   }
 }
