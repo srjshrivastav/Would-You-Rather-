@@ -9,7 +9,6 @@ import "jquery/dist/jquery.slim.min.js";
 import "popper.js/dist/popper.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "./App.css";
-// import "./index.css";
 import App from "./components/App";
 import { BrowserRouter } from "react-router-dom";
 

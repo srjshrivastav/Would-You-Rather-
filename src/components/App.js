@@ -20,41 +20,36 @@ class App extends React.Component {
     });
   }
   render() {
-    const { logIn } = this.props;
     return (
       <div>
         <NavBar />
         <Switch>
-          {!logIn ? (
+          <Fragment>
             <Route exact path="/" component={LoginPage} />
-          ) : (
-            <Fragment>
-              <Route
-                exact
-                path="/:user/Home/Unanswered"
-                render={() => <QuestionCard title={"Unanswered"} />}
-              />
-              <Route
-                exact
-                path="/:user/Home/Answered"
-                render={() => <QuestionCard title={"Answered"} />}
-              />
-              <Route exact path="/question/:qid" component={Card} />
-              <Route exact path="/:id/askNewQuestion" component={NewQues} />
-              <Route exact path="/:id/Leaderboard" component={Leaderboard} />
-            </Fragment>
-          )}
-
+            <Route
+              exact
+              path="/Home/Unanswered"
+              render={() => <QuestionCard title={"Unanswered"} />}
+            />
+            <Route
+              exact
+              path="/Home/Answered"
+              render={() => <QuestionCard title={"Answered"} />}
+            />
+            <Route exact path="/question/:qid" component={Card} />
+            <Route exact path="/askNewQuestion" component={NewQues} />
+            <Route exact path="/leaderboard" component={Leaderboard} />
+          </Fragment>
           <NotFound history={this.props.history} />
         </Switch>
       </div>
     );
   }
 }
-function mapStateToProps({ authedUser }) {
-  return {
-    logIn: authedUser !== null ? authedUser : null,
-  };
-}
+// function mapStateToProps({ authedUser }) {
+//   return {
+//     logIn: authedUser !== null ? authedUser : null,
+//   };
+// }
 
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(connect()(App));

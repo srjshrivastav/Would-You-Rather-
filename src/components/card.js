@@ -9,7 +9,7 @@ class Card extends React.Component {
     this.props.dispatch(handleAnswer(id, ans));
   };
   handleCancel = (title) => {
-    this.props.history.push(`/${this.props.authedUser}/Home/${title}`);
+    this.props.history.push(`/Home/${title}`);
   };
 
   render() {

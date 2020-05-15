@@ -15,7 +15,7 @@ class NavBar extends React.Component {
           <div className="container">
             <Link
               className="navbar-brand mr-auto text-white"
-              to={authedUser ? `/${user.id}/Home/Unanswered` : "/"}
+              to={authedUser ? "/Home/Unanswered" : "/"}
             >
               WouldYouRather?
             </Link>
@@ -62,13 +62,13 @@ class NavBar extends React.Component {
                     >
                       <Link
                         className="dropdown-item  text-white hover-color"
-                        to={`/${user.id}/Leaderboard`}
+                        to="/leaderboard"
                       >
                         Leaderboard
                       </Link>
                       <Link
                         className="dropdown-item text-white hover-color"
-                        to={`/${user.name}/askNewQuestion`}
+                        to="/askNewQuestion"
                       >
                         Ask New Question?
                       </Link>

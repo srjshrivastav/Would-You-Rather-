@@ -2,6 +2,7 @@ import React from "react";
 import { handleAddQuestion } from "../actions/shared";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import LoginPage from "./LogInPage";
 
 class NewQues extends React.Component {
   state = {
@@ -19,11 +20,13 @@ class NewQues extends React.Component {
     const opOne = this.state.opOne;
     const opTwo = this.state.opTwo;
     this.props.dispatch(handleAddQuestion(opOne, opTwo));
-    this.props.history.push(`/${this.props.authedUser}/Home/Unanswered`);
+    this.props.history.push("/Home/Unanswered");
   };
 
   render() {
-    return (
+    return !this.props.authedUser ? (
+      <LoginPage />
+    ) : (
       <div className="container mt-3">
         <div className="row">
           <div className="col-12">

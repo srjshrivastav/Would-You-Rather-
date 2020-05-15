@@ -9,7 +9,7 @@ class LoginPage extends React.Component {
     this.props.dispatch(setAuthedUser(id));
   };
   render() {
-    const { users } = this.props;
+    const { users, path } = this.props;
     return (
       <div className="container mt-5">
         <div className="row row-content">
@@ -47,7 +47,7 @@ class LoginPage extends React.Component {
                         className="dropdown-item"
                         id={user}
                         key={users[user].id}
-                        to={`/${user}/Home/Unanswered`}
+                        to={path === "/" ? "/Home/Unanswered/" : path}
                         onClick={this.handleLogin.bind(this, users[user].id)}
                       >
                         {user}
@@ -64,9 +64,10 @@ class LoginPage extends React.Component {
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }, { match }) {
   return {
     users,
+    path: match.path,
   };
 }
 

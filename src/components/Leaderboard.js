@@ -1,9 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+import LoginPage from "./LogInPage";
 
 function Leaderboard(props) {
-  const { users } = props;
-  return (
+  const { users, authedUser } = props;
+  return !authedUser ? (
+    <LoginPage />
+  ) : (
     <div className="container mt-sm-4">
       <h3 className="text-center">Leaderboard</h3>
       <div className="table-responsive">
@@ -41,11 +44,12 @@ function Leaderboard(props) {
   );
 }
 
-const mapStateToProps = ({ users }) => {
+const mapStateToProps = ({ users, authedUser }) => {
   const userScore = (user) =>
     Object.keys(user.answers).length + user.questions.length;
   return {
     users: Object.values(users).sort((a, b) => userScore(b) - userScore(a)),
+    authedUser,
   };
 };
 
