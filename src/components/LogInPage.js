@@ -66,7 +66,6 @@ class LoginPage extends React.Component {
 }
 
 function mapStateToProps({ users }, { match }) {
-  console.log(match.url);
   return {
     users,
     url: match.url,
