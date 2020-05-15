@@ -1,7 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { handleAnswer } from "../actions/shared";
 import { connect } from "react-redux";
 import LoginPage from "./LogInPage";
+import { Redirect } from "react-router-dom";
+import NavBar from "../components/NavBar";
 
 class Card extends React.Component {
   handleChange = (e, id) => {
@@ -26,79 +28,88 @@ class Card extends React.Component {
 
     return !authedUser ? (
       <LoginPage />
+    ) : !question ? (
+      <Redirect to="/pageNotFound" />
     ) : (
-      <div className="container mt-5">
-        <div className="row justify-content-center">
-          <div className="card w-50 h-75">
-            <div className="card-header ">
-              Would You Rather?
-              <span className="float-right">
-                <button
-                  className="btn btn-outline-dark"
-                  onClick={() => this.handleCancel(title)}
-                >
-                  X
-                </button>
-              </span>
-            </div>
-            <div className="card-body">
-              <form>
-                <div className="custom-control custom-radio">
-                  <input
-                    type="radio"
-                    className="custom-control-input"
-                    id={question.optionOne.text}
-                    name="option"
-                    value="optionOne"
-                    checked={ans ? (ans === "optionOne" ? true : false) : false}
-                    disabled={ans ? true : false}
-                    onChange={(e) => this.handleChange(e, id)}
-                  />
-                  <label
-                    className="custom-control-label"
-                    htmlFor={question.optionOne.text}
+      <Fragment>
+        <NavBar />
+        <div className="container mt-5">
+          <div className="row justify-content-center">
+            <div className="card w-50 h-75">
+              <div className="card-header ">
+                Would You Rather?
+                <span className="float-right">
+                  <button
+                    className="btn btn-outline-dark"
+                    onClick={() => this.handleCancel(title)}
                   >
-                    {question.optionOne.text}
-                  </label>
-                </div>
-                <div className="custom-control custom-radio mt-4">
-                  <input
-                    type="radio"
-                    className="custom-control-input"
-                    id={question.optionTwo.text}
-                    name="option"
-                    value="optionTwo"
-                    checked={ans ? (ans === "optionTwo" ? true : false) : false}
-                    disabled={ans ? true : false}
-                    onChange={(e) => this.handleChange(e, id)}
-                  />
-                  <label
-                    className="custom-control-label mt"
-                    htmlFor={question.optionTwo.text}
-                  >
-                    {question.optionTwo.text}
-                  </label>
-                </div>
-              </form>
-              {title === "Answered" && (
-                <div className="progress">
-                  <div
-                    className="progress-one"
-                    style={{ width: `${percOne}%` }}
-                  >{`${percOne}%`}</div>
-                  <div
-                    className="progress-two"
-                    style={{ width: `${percTwo}%` }}
-                  >{`${percTwo}%`}</div>
-                </div>
-              )}
-            </div>
-            <div className="card-footer text-muted text-right">
-              ~{question.author}
+                    X
+                  </button>
+                </span>
+              </div>
+              <div className="card-body">
+                <form>
+                  <div className="custom-control custom-radio">
+                    <input
+                      type="radio"
+                      className="custom-control-input"
+                      id={question.optionOne.text}
+                      name="option"
+                      value="optionOne"
+                      checked={
+                        ans ? (ans === "optionOne" ? true : false) : false
+                      }
+                      disabled={ans ? true : false}
+                      onChange={(e) => this.handleChange(e, id)}
+                    />
+                    <label
+                      className="custom-control-label"
+                      htmlFor={question.optionOne.text}
+                    >
+                      {question.optionOne.text}
+                    </label>
+                  </div>
+                  <div className="custom-control custom-radio mt-4">
+                    <input
+                      type="radio"
+                      className="custom-control-input"
+                      id={question.optionTwo.text}
+                      name="option"
+                      value="optionTwo"
+                      checked={
+                        ans ? (ans === "optionTwo" ? true : false) : false
+                      }
+                      disabled={ans ? true : false}
+                      onChange={(e) => this.handleChange(e, id)}
+                    />
+                    <label
+                      className="custom-control-label mt"
+                      htmlFor={question.optionTwo.text}
+                    >
+                      {question.optionTwo.text}
+                    </label>
+                  </div>
+                </form>
+                {title === "Answered" && (
+                  <div className="progress">
+                    <div
+                      className="progress-one"
+                      style={{ width: `${percOne}%` }}
+                    >{`${percOne}%`}</div>
+                    <div
+                      className="progress-two"
+                      style={{ width: `${percTwo}%` }}
+                    >{`${percTwo}%`}</div>
+                  </div>
+                )}
+              </div>
+              <div className="card-footer text-muted text-right">
+                ~{question.author}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }

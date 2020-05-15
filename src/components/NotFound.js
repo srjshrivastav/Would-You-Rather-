@@ -2,10 +2,10 @@ import React from "react";
 
 const NotFound = ({ history }) => (
   <div className="container">
-    <div className="row justify-content-center">
-      <div className="col-12 col-sm-4 ">
-        <div className="card align-content-center ">
-          <h3 className="card-title">Page Not Found 404</h3>
+    <div className="row justify-content-center mt-5">
+      <div className="col-md-6 mt-5">
+        <div className="card text-center mt-5">
+          <h3 className="card-title">Oops ! Question Not Found</h3>
           <div className="card-body">
             <button
               className="btn btn-outline-dark"

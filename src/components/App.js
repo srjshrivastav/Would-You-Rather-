@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { getInitialData } from "../utils/api";
 import { receiveUsers } from "../actions/users";
 import { receiveQuestions } from "../actions/questions";
-import NavBar from "./NavBar";
 import LoginPage from "./LogInPage";
 import Leaderboard from "./Leaderboard";
 import NewQues from "./NewQues";
@@ -22,7 +21,6 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
         <Switch>
           <Fragment>
             <Route exact path="/" component={LoginPage} />
@@ -39,8 +37,12 @@ class App extends React.Component {
             <Route exact path="/question/:qid" component={Card} />
             <Route exact path="/askNewQuestion" component={NewQues} />
             <Route exact path="/leaderboard" component={Leaderboard} />
+            <Route
+              exact
+              path="/pageNotFound"
+              render={() => <NotFound history={this.props.history} />}
+            />
           </Fragment>
-          <NotFound history={this.props.history} />
         </Switch>
       </div>
     );

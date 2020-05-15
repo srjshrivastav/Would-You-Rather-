@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import MinCard from "./MinCard";
 import LoginPage from "./LogInPage";
+import NavBar from "./NavBar";
 
 class Questioncard extends React.Component {
   render() {
@@ -10,43 +11,46 @@ class Questioncard extends React.Component {
     return !authedUser ? (
       <LoginPage />
     ) : (
-      <div className="container">
-        <ul className="nav nav-tabs bg-dark hover-color">
-          <li className="nav-item">
-            <Link
-              className={
-                title === "Unanswered"
-                  ? "nav-link active"
-                  : "nav-link text-white "
-              }
-              to="/Home/Unanswered"
-            >
-              Unanswered
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              className={
-                title === "Answered"
-                  ? "nav-link active "
-                  : "nav-link  text-white"
-              }
-              to="/Home/Answered"
-            >
-              Answered
-            </Link>
-          </li>
-        </ul>
+      <Fragment>
+        <NavBar />
         <div className="container">
-          <div className="row">
-            <div className="col-12 col-sm">
-              {ids.map((id) => (
-                <MinCard id={id} key={id} />
-              ))}
+          <ul className="nav nav-tabs bg-dark hover-color">
+            <li className="nav-item">
+              <Link
+                className={
+                  title === "Unanswered"
+                    ? "nav-link active"
+                    : "nav-link text-white "
+                }
+                to="/Home/Unanswered"
+              >
+                Unanswered
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className={
+                  title === "Answered"
+                    ? "nav-link active "
+                    : "nav-link  text-white"
+                }
+                to="/Home/Answered"
+              >
+                Answered
+              </Link>
+            </li>
+          </ul>
+          <div className="container">
+            <div className="row">
+              <div className="col-12 col-sm">
+                {ids.map((id) => (
+                  <MinCard id={id} key={id} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }

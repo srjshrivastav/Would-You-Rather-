@@ -1,46 +1,50 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import LoginPage from "./LogInPage";
+import NavBar from "./NavBar";
 
 function Leaderboard(props) {
   const { users, authedUser } = props;
   return !authedUser ? (
     <LoginPage />
   ) : (
-    <div className="container mt-sm-4">
-      <h3 className="text-center">Leaderboard</h3>
-      <div className="table-responsive">
-        <table className="table table-striped">
-          <thead className="thead-dark">
-            <tr>
-              <th>Rank</th>
-              <th>Profile</th>
-              <th>User</th>
-              <th>Questions Asked</th>
-              <th>Questions Answered</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <tr key={user.id}>
-                <td>{index + 1}</td>
-                <td>
-                  <img
-                    src={user.avatarURL}
-                    className="LeadAvatar {
-                    "
-                    alt={`Avatar of ${user.name}`}
-                  />
-                </td>
-                <td>{user.name}</td>
-                <td>{user.questions.length}</td>
-                <td>{Object.keys(user.answers).length}</td>
+    <Fragment>
+      <NavBar />
+      <div className="container mt-sm-4">
+        <h3 className="text-center">Leaderboard</h3>
+        <div className="table-responsive">
+          <table className="table table-striped">
+            <thead className="thead-dark">
+              <tr>
+                <th>Rank</th>
+                <th>Profile</th>
+                <th>User</th>
+                <th>Questions Asked</th>
+                <th>Questions Answered</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user, index) => (
+                <tr key={user.id}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <img
+                      src={user.avatarURL}
+                      className="LeadAvatar {
+                    "
+                      alt={`Avatar of ${user.name}`}
+                    />
+                  </td>
+                  <td>{user.name}</td>
+                  <td>{user.questions.length}</td>
+                  <td>{Object.keys(user.answers).length}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 
