@@ -14,7 +14,7 @@ class Questioncard extends React.Component {
       <Fragment>
         <NavBar />
         <div className="container">
-          <ul className="nav nav-tabs bg-dark ">
+          <ul className="nav nav-tabs ">
             <li className="nav-item">
               <a
                 className="nav-link active"
@@ -48,7 +48,7 @@ class Questioncard extends React.Component {
                 ))}
               </div>
             </div>
-            <div className="tab-pane fade show" role="tabpanel" id="answered">
+            <div className="tab-pane fade show " role="tabpanel" id="answered">
               <div className="col-12 col-sm">
                 {AnsIds.map((id) => (
                   <MinCard id={id} key={id} />

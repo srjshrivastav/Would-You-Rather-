@@ -15,7 +15,7 @@ class NavBar extends React.Component {
           <div className="container">
             <Link
               className="navbar-brand mr-auto text-white"
-              to={authedUser ? "/Home/Unanswered" : "/"}
+              to={authedUser ? "/Dashboard" : "/"}
             >
               WouldYouRather?
             </Link>
