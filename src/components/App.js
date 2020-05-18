@@ -24,16 +24,7 @@ class App extends React.Component {
         <Switch>
           <Fragment>
             <Route exact path="/" component={LoginPage} />
-            <Route
-              exact
-              path="/Home/Unanswered"
-              render={() => <QuestionCard title={"Unanswered"} />}
-            />
-            <Route
-              exact
-              path="/Home/Answered"
-              render={() => <QuestionCard title={"Answered"} />}
-            />
+            <Route exact path="/Dashboard" component={QuestionCard} />
             <Route exact path="/question/:qid" component={Card} />
             <Route exact path="/askNewQuestion" component={NewQues} />
             <Route exact path="/leaderboard" component={Leaderboard} />

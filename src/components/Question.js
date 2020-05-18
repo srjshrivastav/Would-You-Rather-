@@ -1,49 +1,56 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import MinCard from "./MinCard";
 import LoginPage from "./LogInPage";
 import NavBar from "./NavBar";
 
 class Questioncard extends React.Component {
   render() {
-    const { ids, title, authedUser } = this.props;
+    const { UnAnsIds, AnsIds, authedUser } = this.props;
+    console.log(UnAnsIds, AnsIds, authedUser);
     return !authedUser ? (
       <LoginPage />
     ) : (
       <Fragment>
         <NavBar />
         <div className="container">
-          <ul className="nav nav-tabs bg-dark hover-color">
+          <ul className="nav nav-tabs bg-dark ">
             <li className="nav-item">
-              <Link
-                className={
-                  title === "Unanswered"
-                    ? "nav-link active"
-                    : "nav-link text-white "
-                }
-                to="/Home/Unanswered"
+              <a
+                className="nav-link active"
+                href="#unanswered"
+                role="tab"
+                data-toggle="tab"
               >
                 Unanswered
-              </Link>
+              </a>
             </li>
             <li className="nav-item">
-              <Link
-                className={
-                  title === "Answered"
-                    ? "nav-link active "
-                    : "nav-link  text-white"
-                }
-                to="/Home/Answered"
+              <a
+                className="nav-link"
+                href="#answered"
+                role="tab"
+                data-toggle="tab"
               >
                 Answered
-              </Link>
+              </a>
             </li>
           </ul>
-          <div className="container">
-            <div className="row">
+          <div className="tab-content">
+            <div
+              className="tab-pane fade show active"
+              role="tabpanel"
+              id="unanswered"
+            >
               <div className="col-12 col-sm">
-                {ids.map((id) => (
+                {UnAnsIds.map((id) => (
+                  <MinCard id={id} key={id} />
+                ))}
+              </div>
+            </div>
+            <div className="tab-pane fade show" role="tabpanel" id="answered">
+              <div className="col-12 col-sm">
+                {AnsIds.map((id) => (
                   <MinCard id={id} key={id} />
                 ))}
               </div>
@@ -55,32 +62,21 @@ class Questioncard extends React.Component {
   }
 }
 
-function mapStateToProps({ questions, authedUser, users }, { title }) {
-  let ids, ans;
+function mapStateToProps({ questions, authedUser, users }) {
+  let AnsIds, UnAnsIds;
   if (authedUser) {
-    ids = Object.keys(users[authedUser].answers);
-    ans = users[authedUser].answers;
-    if (title === "Unanswered") {
-      ids = Object.keys(questions)
-        .filter((i) => !ids.includes(i))
-        .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
-      return {
-        ids,
-        title,
-        authedUser,
-      };
-    } else {
-      return {
-        ids,
-        ans,
-        title,
-        authedUser,
-      };
-    }
-  } else {
+    AnsIds = Object.keys(users[authedUser].answers);
+    UnAnsIds = Object.keys(questions)
+      .filter((i) => !AnsIds.includes(i))
+      .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
     return {
       authedUser,
+      AnsIds,
+      UnAnsIds,
     };
   }
+  return {
+    authedUser,
+  };
 }
 export default connect(mapStateToProps)(Questioncard);

@@ -11,8 +11,8 @@ class Card extends React.Component {
     const ans = e.target.value;
     this.props.dispatch(handleAnswer(id, ans));
   };
-  handleCancel = (title) => {
-    this.props.history.push(`/Home/${title}`);
+  handleCancel = () => {
+    this.props.history.push("/Dashboard");
   };
 
   render() {
@@ -41,7 +41,7 @@ class Card extends React.Component {
                 <span className="float-right">
                   <button
                     className="btn btn-outline-dark"
-                    onClick={() => this.handleCancel(title)}
+                    onClick={() => this.handleCancel()}
                   >
                     X
                   </button>

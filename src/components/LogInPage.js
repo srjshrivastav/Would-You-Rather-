@@ -51,7 +51,7 @@ class LoginPage extends React.Component {
                           className="dropdown-item"
                           id={user}
                           key={users[user].id}
-                          to={url === "/" ? "/Home/Unanswered" : url}
+                          to={url === "/" ? "/Dashboard" : url}
                           onClick={this.handleLogin.bind(this, users[user].id)}
                         >
                           {user}
